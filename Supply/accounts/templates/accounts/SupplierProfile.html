@@ -1,0 +1,10 @@
+{%extends 'accounts/base.html'%}
+{%block content%}
+<div class="jumbotron">
+  <img class="rounded-circle" width='150' height='150' src="{{supProfile.image.url}}" alt="edit">
+{{supProfile.location}}
+{{user.username}}
+{{user.email}}
+
+  </div>
+{%endblock%}

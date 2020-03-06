@@ -1,0 +1,16 @@
+{%extends 'accounts/base.html'%}
+{%block content%}
+<div class="container">
+<div class="jumbotron">
+<div class="row">
+  <div class="col-sm-6">
+  <a href="{%url 'accounts:supplier'%}"><button class="btn btn-primary float-right">Supplier Signup</button></a>
+  </div>
+  <div class="col-sm-6">
+  <a href="{%url 'accounts:customer'%}"><button class="btn btn-primary">Customer Signup</button></a>
+  </div>
+  </div>
+  <a href="{%url 'accounts:login'%}"><button class="btn btn-success">Login</button></a>
+  </div>
+  </div>
+{%endblock%}
