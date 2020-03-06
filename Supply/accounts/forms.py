@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
-from accounts.models import User,Supplier,Customer,Products
+from accounts.models import User,Supplier,Customer,Categories
 
 
 class UserCreationForm(ModelForm):
@@ -64,7 +64,7 @@ class SupplierSignupForm(ModelForm):
         return user
 class CustomerSignupForm(ModelForm):
         interest=forms.ModelMultipleChoiceField(
-        queryset=Products.objects.all(),
+        queryset=Categories.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True
         )
@@ -92,3 +92,25 @@ class CustomerSignupForm(ModelForm):
             customer=Customer.objects.create(user=user)
             customer.interest.add(*self.cleaned_data.get('interest'))
             return user
+class SupplierProfileUpdateForm(ModelForm):
+    class Meta:
+        model=Supplier
+        fields=['telephone','status','image','location']
+class SupplierUserUpdateForm(ModelForm):
+    username=forms.CharField(label="Business Name",max_length=50)
+    class Meta:
+        model=User
+        fields=['username','first_name','last_name']
+class CustomerProfileUpdateForm(ModelForm):
+    interest=forms.ModelMultipleChoiceField(
+    queryset=Categories.objects.all(),
+    widget=forms.CheckboxSelectMultiple,
+    required=True
+    )
+    class Meta:
+        model=Customer
+        fields=['interest','image','status']
+class CustomerUserUpdateForm(ModelForm):
+    class Meta:
+        model=User
+        fields=['username','first_name','last_name']

@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 from django.db.models.signals import post_save
@@ -83,12 +84,25 @@ class User(AbstractBaseUser):
     @property
     def customer(self):
         return self.customer
-class Products(models.Model):
-    product_name=models.CharField(max_length=50)
+class Categories(models.Model):
+    category_choices=(
+    ('Beauty & Cosmetics','Beauty & Cosmetics'),
+    ('Electronics','Electronics')
+    )
+    category=models.CharField(max_length=30,choices=category_choices,unique=True)
     def __str__(self):
-        return self.product_name
+        return self.category
+class Customer(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    interest=models.ManyToManyField(Categories)
+    image=models.ImageField(upload_to='Customers_Profile_picts',default="default.jpg")
+    status=models.TextField(blank=True,null=True)
+    def __str__(self):
+        return self.user.username
     class Meta:
-        verbose_name_plural='Products'
+        verbose_name_plural='Customers'
+
+
 class Supplier(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     location=models.CharField(max_length=20,blank=True,null=True)
@@ -100,15 +114,21 @@ class Supplier(models.Model):
     class Meta:
         verbose_name_plural="Suppliers"
 
-class Customer(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    interest=models.ManyToManyField(Products)
-    image=models.ImageField(upload_to="Customer_profile_picts",default="default.jpg")
-    status=models.TextField(blank=True,null=True)
-    def __str__(self):
-        return self.user.username
-    class Meta:
-        verbose_name_plural='Customers'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 '''@receiver(post_save,sender=User)
 def create_profile(sender,instance,created,**kwargs):

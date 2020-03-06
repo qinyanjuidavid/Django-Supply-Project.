@@ -1,0 +1,75 @@
+{%extends 'accounts/base.html'%}
+{%block content%}
+<div class="container-fluid">
+{%if user.is_authenticated and user.is_supplier%}
+<div class="container-fluid text-white p-1">
+<div class="card-header" style=background-color:forestgreen;>
+<h1 align=center>{{user.username}} Suppliers Product.</h1>
+</div>
+</div>
+<div class="button p-1" align=right>
+<a href="{%url 'business:add'%}"><button class="btn btn-outline-primary">+Add Products</button></a>
+  </div>
+<div class="card border-white">
+<div class="card-body">
+<div class="row">
+  <div class="col-sm-9">
+    <div class="row">
+{%for prod_obj in prod_obj%}
+<div class="card border-primary col-sm-2 m-2 p-1" align=center>
+<img src="{{prod_obj.product_image.url}}" height='200' alt="Edit">
+{{prod_obj.product_name}}<br>
+{{prod_obj.price}}<br>
+{{prod_obj.category}}
+<br>
+<a href="{%url 'business:detail' prod_obj.id%}"><button class="btn btn-outline-warning p-1 m-1">View Product</button></a>
+</div>
+{%endfor%}
+</div>
+</div>
+<div class="col-sm-3">
+  <div class="card border-primary">
+    <div class="card-header text-white" style=background-color:navy;>
+<h5>Chat Room</h5>
+</div>
+<div class="card-body">
+
+  </div>
+</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{%elif user.is_authenticated and user.is_customer%}
+<h5>You are a customer</h5>
+
+
+
+
+
+
+
+
+
+
+
+{%else%}
+<a href="{%url 'accounts:login'%}"><button>Login</button></a
+
+{%endif%}
+
+</div>
+{%endblock%}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from accounts.models import User,Supplier,Customer
-from accounts.forms import SupplierSignupForm,CustomerSignupForm
+from accounts.models import User, Supplier, Customer
+from accounts.forms import SupplierSignupForm,CustomerSignupForm,SupplierProfileUpdateForm,CustomerProfileUpdateForm,CustomerUserUpdateForm,SupplierUserUpdateForm
 from django.views.generic import CreateView
 from django.contrib.auth import login
 from accounts.decorators import supplier_required,customer_required
@@ -40,15 +40,35 @@ class CustomerSignupView(CreateView):
 @supplier_required
 def SupplierProfileView(request):
     supProfile=Supplier.objects.get(user=request.user)
+    user_form=SupplierUserUpdateForm(instance=request.user)
+    form=SupplierProfileUpdateForm(instance=supProfile)
+    if request.method=="POST":
+        form=SupplierProfileUpdateForm(request.POST or None,request.FILES or None,instance=supProfile)
+        user_form=SupplierUserUpdateForm(request.POST or None,request.FILES or None,instance=request.user)
+        if form.is_valid() and user_form.is_valid():
+            form.save()
+            user_form.save()
     context={
-    'supProfile':supProfile
+    'supProfile':supProfile,
+    'form':form,
+    'user_form':user_form
     }
     return render(request,'accounts/SupplierProfile.html',context)
 @login_required
 @customer_required
 def CustomerProfileView(request):
     custProfile=Customer.objects.get(user=request.user)
+    form=CustomerProfileUpdateForm(instance=custProfile)
+    user_form=CustomerUserUpdateForm(instance=request.user)
+    if request.method=="POST":
+        form=CustomerProfileUpdateForm(request.POST or None,request.FILES or None,instance=custProfile)
+        user_form=CustomerUserUpdateForm(request.POST or None,request.FILES or None,instance=request.user)
+        if form.is_valid() and user_form.is_valid():
+            form.save()
+            user_form.save()
     context={
-    'custProfile':custProfile
+    'custProfile':custProfile,
+    'form':form,
+    'user_form':user_form
     }
     return render(request,'accounts/CustomerProfile.html',context)

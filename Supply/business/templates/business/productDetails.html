@@ -1,0 +1,31 @@
+{%extends 'accounts/base.html'%}
+{%block content%}
+<div class="container p-2">
+  <div class="jumbotron">
+    <div class="card">
+      <div class="card-header">
+        <legend style=color:maroon;>Product Details.</legend>
+        </div>
+        <div class="card-body">
+  <div class="row">
+  <div class="col-sm-5">
+<img src="{{product_details.product_image.url}}" width="400" height="500" alt="edit">
+</div>
+<div class="col-sm-7">
+  <b>Category: </b>{{product_details.category}}<br>
+  <b>Product Name: </b>{{product_details.product_name}}<br>
+  <b>Price: </b>{{product_details.price}}<br>
+  <b>Description: </b>{{product_details.description}}
+<div class="buttons m-5" align=center>
+<a href="{%url 'business:update' product_details.id%}"><button class="btn btn-outline-info p-1 col-sm-4">Update</button></a>
+<a href="{%url 'business:delete' product_details.id%}"><button class="btn btn-outline-danger p-1 col-sm-4">Delete</button></a>
+  </div>
+
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+{%endblock%}

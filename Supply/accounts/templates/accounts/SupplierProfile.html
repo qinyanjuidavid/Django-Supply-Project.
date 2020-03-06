@@ -1,10 +1,44 @@
 {%extends 'accounts/base.html'%}
+{%load crispy_forms_tags%}
 {%block content%}
-<div class="jumbotron">
+<div class="container">
+  <div class="jumbotron">
+  <div class="card">
+    <div class="card-header text-white" style=background-color:forestgreen;>
+      <legend>My Profile.</legend>
+      </div>
+      <div class="card-body m-2">
+        <div class="row">
+          <div class="col-sm-2">
   <img class="rounded-circle" width='150' height='150' src="{{supProfile.image.url}}" alt="edit">
-{{supProfile.location}}
-{{user.username}}
-{{user.email}}
+  </div>
+  <div class="col-sm-10">
+<b>Business Name:</b> {{user.username}}<br>
+<b>Owner's Name:</b> {{user.first_name}} {{user.last_name}}<br>
+<b>Email Address:</b> {{user.email}}<br>
+<b>Phone Number:</b> {{supProfile.telephone}}<br>
+<b>Location:</b> {{supProfile.location}}<br>
+<b>Status:</b> {{supProfile.status}}
+</div>
+</div>
+<div class="col-sm-10">
+<div class="card border-white m-3">
+<div class="card-header text-white" style=background-color:dodgerblue;>
+<legend>Update Profile.</legend>
+  </div>
+  <div class="card-body">
+<form method="POST" action="" enctype="multipart/form-data">
+{%csrf_token%}
+{{user_form|crispy}}
+{{form|crispy}}
+<button class="btn btn-info">Update Profile</button>
+  </form>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
 
   </div>
 {%endblock%}

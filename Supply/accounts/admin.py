@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import User,Supplier,Customer,Products
+from accounts.models import User,Supplier,Customer,Categories
 from accounts.forms import UserChangeForm,UserCreationForm
 
 
@@ -13,4 +13,4 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User,UserAdmin)
 admin.site.register(Supplier)
 admin.site.register(Customer)
-admin.site.register(Products)
+admin.site.register(Categories)
