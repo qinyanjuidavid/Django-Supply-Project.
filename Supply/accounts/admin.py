@@ -1,6 +1,8 @@
 from django.contrib import admin
-from accounts.models import User,Supplier,Customer,Categories
+from accounts.models import User,Supplier,Customer,Categories,Counties
 from accounts.forms import UserChangeForm,UserCreationForm
+from leaflet.admin import LeafletGeoAdmin
+
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -10,7 +12,13 @@ class UserAdmin(admin.ModelAdmin):
     form=UserChangeForm
     add_form=UserCreationForm
 
-admin.site.register(User,UserAdmin)
-admin.site.register(Supplier)
+class SupplierAdmin(LeafletGeoAdmin):
+    list_display=('user','location')
+
+admin.site.register(Supplier,SupplierAdmin)
+class CountiesAdmin(LeafletGeoAdmin):
+    list_display=('name','code')
+admin.site.register(Counties,CountiesAdmin)
 admin.site.register(Customer)
 admin.site.register(Categories)
+admin.site.register(User,UserAdmin)

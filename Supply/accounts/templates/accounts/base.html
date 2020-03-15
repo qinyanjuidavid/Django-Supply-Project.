@@ -1,15 +1,28 @@
 <!doctype html>
 <html lang="en">
+{%load leaflet_tags%}
 {%load icons%}
+{%load static%}
   <head>
     <!-- Required meta tags -->
+    {%leaflet_js plugins='forms'%}
+    {%leaflet_css plugins='forms'%}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 crossorigin="anonymous">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--Mapping==========================================================================-->
+<link rel="stylesheet" type="text/css" href="{%static 'routing/leaflet-machine.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/easy-button.css' %}">
 
+	<link rel="stylesheet" type="text/css" href="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css' %}">
+	<script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}" >	</script>
+	<script type="text/javascript" src="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js' %}" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/easy-button.js' %}" ></script>
+<!--Mapping=============================================================================-->
     <title>Day Codes!</title>
     <nav class="navbar navbar-expand-md bg-steel fixed-top p-0 text-white" style=background-color:black;>
 
@@ -37,7 +50,8 @@ crossorigin="anonymous">
     <a class="nav-link text-white" href="{%url 'accounts:profilecus'%}"><strong>Customer Profile</strong></a>
   </li>
                     {%else%}
-<a href="{%url 'accounts:login'%}"><button>Login</button></a>
+
+<a href="{%url 'accounts:login'%}"><strong>Login</strong></a>
 
                     {%endif%}
   {%else%}
@@ -56,6 +70,8 @@ crossorigin="anonymous">
   <body class="m-5">
     <div class="container-fluid p-3">
     {%block content%}
+
+
     {%endblock%}
   </div>
     <!-- Optional JavaScript -->

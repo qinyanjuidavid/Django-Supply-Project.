@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from accounts.models import User, Supplier, Customer
+from accounts.models import User, Supplier, Customer,Counties
 from accounts.forms import SupplierSignupForm,CustomerSignupForm,SupplierProfileUpdateForm,CustomerProfileUpdateForm,CustomerUserUpdateForm,SupplierUserUpdateForm
 from django.views.generic import CreateView
 from django.contrib.auth import login
 from accounts.decorators import supplier_required,customer_required
 from django.contrib.auth.decorators import login_required
+from django.core.serializers import serialize
+
+
 
 def Home(request):
     context={

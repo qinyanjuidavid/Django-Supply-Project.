@@ -4,6 +4,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from accounts.models import User,Supplier,Customer,Categories
+from django.contrib.gis import forms
 
 
 class UserCreationForm(ModelForm):
@@ -92,8 +93,10 @@ class CustomerSignupForm(ModelForm):
             customer=Customer.objects.create(user=user)
             customer.interest.add(*self.cleaned_data.get('interest'))
             return user
+from leaflet.forms.widgets import LeafletWidget
 class SupplierProfileUpdateForm(ModelForm):
     class Meta:
+        widgets={'location':LeafletWidget()}
         model=Supplier
         fields=['telephone','status','image','location']
 class SupplierUserUpdateForm(ModelForm):

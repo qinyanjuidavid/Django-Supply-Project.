@@ -1,6 +1,11 @@
 {%extends 'accounts/base.html'%}
 {%load crispy_forms_tags%}
+{%load leaflet_tags%}
+{%leaflet_js plugins="forms"%}
+{%leaflet_css plugins="forms"%}
 {%block content%}
+
+<!--============================================================================-->
 <div class="container">
   <div class="jumbotron">
   <div class="card">
@@ -30,7 +35,11 @@
 <form method="POST" action="" enctype="multipart/form-data">
 {%csrf_token%}
 {{user_form|crispy}}
-{{form|crispy}}
+{{form|crispy}}<br>
+<div class="map p-1">
+<!--=================+=============================================================
+{%leaflet_map "gis"%}-->
+</div>
 <button class="btn btn-info">Update Profile</button>
   </form>
   </div>

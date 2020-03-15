@@ -1,8 +1,8 @@
-
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.gis.db import models
 
 
 
@@ -92,6 +92,8 @@ class Categories(models.Model):
     category=models.CharField(max_length=30,choices=category_choices,unique=True)
     def __str__(self):
         return self.category
+    class Meta:
+        verbose_name_plural="Categories"
 class Customer(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     interest=models.ManyToManyField(Categories)
@@ -105,7 +107,7 @@ class Customer(models.Model):
 
 class Supplier(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    location=models.CharField(max_length=20,blank=True,null=True)
+    location=models.PointField(srid=4326,blank=True,null=True)
     image=models.ImageField(upload_to='Supplier_Profile_picts',default="default.jpg")
     telephone=models.CharField(max_length=20,default="+254")
     status=models.TextField(blank=True,null=True)
@@ -113,6 +115,23 @@ class Supplier(models.Model):
         return self.user.username
     class Meta:
         verbose_name_plural="Suppliers"
+#====================================================================
+class Counties(models.Model):
+    fid=models.FloatField()
+    objectid=models.FloatField()
+    code_id=models.FloatField()
+    name=models.CharField(max_length=70)
+    code=models.CharField(max_length=3)
+    shape_leng=models.FloatField()
+    shape_area=models.FloatField()
+    area=models.FloatField()
+    geom=models.MultiPolygonField(srid=4326)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name_plural="Counties"
+
 
 
 

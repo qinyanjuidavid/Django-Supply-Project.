@@ -27,7 +27,7 @@
     </div>
     <div class="card-body">
   {%for cust in custProfile.interest.all%}
-{{cust.product_name}}
+{{forloop.counter}}. {{cust.category}}
 <br>
 {%endfor%}
 </div>
@@ -45,7 +45,7 @@
 {%csrf_token%}
 {{user_form|crispy}}
 {{form|crispy}}
-<button>Update Profile</button>
+<button class="btn btn-outline-primary">Update Profile</button>
   </form>
   </div>
   </div>

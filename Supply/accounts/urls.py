@@ -1,6 +1,6 @@
 from django.urls import path
 from accounts import views
-from accounts.views import SupplierSignupView,CustomerSignupView
+from accounts.views import SupplierSignupView,CustomerSignupView#importing a
 from django.contrib.auth import views as auth_views
 from django.http import HttpResponseRedirect
 app_name='accounts'

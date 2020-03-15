@@ -14,3 +14,5 @@ class Products(models.Model):
 
     def __str__(self):
         return f'{self.category} Category.'
+    class Meta:
+        verbose_name_plural="Products"

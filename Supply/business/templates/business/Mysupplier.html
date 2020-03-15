@@ -1,0 +1,49 @@
+{%extends 'accounts/base.html'%}
+{%load leaflet_tags%}
+{%leaflet_js plugins="ALL"%}
+{%leaflet_css plugins="ALL"%}
+{%leaflet_js%}
+{%leaflet_css%}
+{%load static%}
+
+<link rel="stylesheet" type="text/css" href="{%static 'routing/leaflet-machine.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/easy-button.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css' %}">
+	<script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}" ></script><!--/used-->
+	<script type="text/javascript" src="{% static 'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js' %}" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/easy-button.js' %}" ></script>
+{%block content%}
+<div class="container">
+  <div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="card">
+      <img src="{{Mysup.image.url}}" height="550" alt="edit">
+      </div>
+      </div>
+      <div class="col-sm-7">
+{{Mysup.user.username}}
+
+</div>
+</div>
+</div>
+<script type="text/javascript">
+function our_layer(map,option){
+  var datasets=new L.GeoJSON.AJAX("{%url 'business:supCounty'%}",{
+
+  });
+  var  Points=new L.GeoJSON.AJAX("{%url 'business:supData'%}",{
+
+  });
+  datasets.addTo(map);
+  Points.addTo(map);
+
+
+}
+  </script>
+
+{%leaflet_map 'gis' callback='window.our_layer'%}
+</div>
+{%endblock%}

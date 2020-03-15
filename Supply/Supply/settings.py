@@ -26,10 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'accounts',
     'crispy_forms',
     'django_icons',
-    'business'
+    'business',
+    'leaflet'
 ]
 
 MIDDLEWARE = [
@@ -66,12 +68,23 @@ WSGI_APPLICATION = 'Supply.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'SystemDev',
+        'USER':'postgres',
+        'PASSWORD':'kinyanjuid29',
+        'HOST':'localhost',
+        'PORT':5432
+    }
 }
+
 
 
 # Password validation
@@ -98,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'AFRICA/NAIROBI'
 
 USE_I18N = True
 
@@ -110,9 +123,20 @@ AUTH_USER_MODEL='accounts.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
+STATIFILES_DIRS=(
+os.path.join(BASE_DIR,'static'),
+)
 CRISPY_TEMPLATE_PACK='bootstrap4'
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 LOGIN_URL='/login/'
 LOGOUT_REDIRECT_URL="/login/"
 LOGIN_REDIRECT_URL='/business/mainPage/'
+LEAFLET_CONFIG={
+'DEFAULT_CENTER':(-0.23,37.87),
+'DEFAULT_ZOOM':6,
+'MAX_ZOOM':24,
+'MIN_ZOOM':5,
+'SCALE':'both',
+'ATTRIBUTION_PREFIX':'DayCodes',
+}
