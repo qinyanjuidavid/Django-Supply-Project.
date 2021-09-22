@@ -7,7 +7,7 @@ cryptography==2.8
 decorator==4.4.2
 defusedxml==0.6.0
 Deprecated==1.2.7
-Django==3.0.3
+Django==3.1.13
 django-allauth==0.41.0
 django-channels==0.7.0
 django-countries==6.0
