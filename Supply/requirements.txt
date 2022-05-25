@@ -65,7 +65,7 @@ psycopg2==2.8.4
 pycparser==2.20
 PyGithub==1.46
 Pygments==2.6.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyrsistent==0.15.7
 python-dateutil==2.8.1
 python-gitlab==2.1.2
